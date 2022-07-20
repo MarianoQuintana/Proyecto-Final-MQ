@@ -1,4 +1,5 @@
 from django.db import models
+from unittest.util import _MAX_LENGTH
 
 class Empresa(models.Model):
 

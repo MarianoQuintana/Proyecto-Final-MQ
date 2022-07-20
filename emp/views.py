@@ -2,21 +2,22 @@ from django.shortcuts import render
 from emp.models import Empresa, Empleados, Clientes
 from emp.forms import EmpresaFormulario, EmpleadosFormulario, ClientesFormulario
 
-def mostrar_empresa(request):
+def ver_empresa(request):
     context={}
     context["empresa"] = Empresa.objects.all()
     return render(request,'emp/mostrar_empresa.html', context)
 
 
-def mostrar_empleados(request):
+def ver_empleados(request):
     context={}
     context["empleados"] = Empleados.objects.all()
     
     return render(request,'emp/mostrar_empleados.html', context)    
 
-def mostrar_clientes(request):
+def ver_clientes(request):
     context={}
     context["clientes"] = Clientes.objects.all()
+   
     return render(request,'emp/mostrar_clientes.html', context)
 
 
