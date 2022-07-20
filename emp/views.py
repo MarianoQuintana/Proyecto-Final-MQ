@@ -5,18 +5,19 @@ from emp.forms import EmpresaFormulario, EmpleadosFormulario, ClientesFormulario
 def mostrar_empresa(request):
     context={}
     context["empresa"] = Empresa.objects.all()
-    return render(request, 'emp/empresa.html', context)
+    return render(request,'emp/mostrar_empresa.html', context)
 
 
 def mostrar_empleados(request):
     context={}
     context["empleados"] = Empleados.objects.all()
-    return render(request, 'emp/empleados.html', context)    
+    
+    return render(request,'emp/mostrar_empleados.html', context)    
 
 def mostrar_clientes(request):
     context={}
     context["clientes"] = Clientes.objects.all()
-    return render(request, 'emp/clientes.html', context)
+    return render(request,'emp/mostrar_clientes.html', context)
 
 
 def empresaFormulario(request):
