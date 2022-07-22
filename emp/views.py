@@ -1,24 +1,9 @@
 from django.shortcuts import render
 from emp.models import Empresa, Empleados, Clientes
-from emp.forms import EmpresaFormulario, EmpleadosFormulario, ClientesFormulario
+from emp.forms import EmpresaFormulario, EmpleadosFormulario, ClientesFormulario, Busqueda_Clientes
 
-def ver_empresa(request):
-    context={}
-    context["empresa"] = Empresa.objects.all()
-    return render(request,'emp/mostrar_empresa.html', context)
-
-
-def ver_empleados(request):
-    context={}
-    context["empleados"] = Empleados.objects.all()
-    
-    return render(request,'emp/mostrar_empleados.html', context)    
-
-def ver_clientes(request):
-    context={}
-    context["clientes"] = Clientes.objects.all()
-   
-    return render(request,'emp/mostrar_clientes.html', context)
+def index(request):
+    return render(request, 'emp/index.html',{})
 
 
 def empresaFormulario(request):
@@ -36,6 +21,13 @@ def empresaFormulario(request):
 
          return render(request,'emp/empresa.html',{"aformulario": aformulario})
 
+def ver_empresa(request):
+    context = {"empresa": Empresa.objects.all()}
+       
+    return render(request,'emp/mostrar_empresa.html', context)
+
+
+
 
 def empleadosFormulario(request):
     if request.method == 'POST':
@@ -52,8 +44,13 @@ def empleadosFormulario(request):
 
          return render(request,'emp/empleados.html',{"bformulario": bformulario})
 
-        
+def ver_empleados(request):
+    context = {"empleados": Empleados.objects.all()}
+       
+    return render(request,'emp/mostrar_empleados.html', context)
+   
 
+        
 def clientesFormulario(request):
     if request.method == 'POST':
         cformulario = ClientesFormulario(request.POST)
@@ -68,4 +65,22 @@ def clientesFormulario(request):
          cformulario = ClientesFormulario()
 
          return render(request,'emp/clientes.html',{"cformulario": cformulario})
-      
+
+def ver_clientes(request):
+    context = {"clientes": Clientes.objects.all()}
+       
+    return render(request,'emp/mostrar_clientes.html', context)
+
+
+
+def buscarClientes(request):
+    
+    formulario_busqueda = Busqueda_Clientes()
+    
+    if request.GET:
+        formulario_busqueda = Busqueda_Clientes(request.GET)
+        if formulario_busqueda.is_valid():
+            clientes = Clientes.objects.filter(nombre=formulario_busqueda.cleaned_data["criterio"]).all()
+            return render(request, "app/busqueda_clientes.html", {"clientes": clientes})
+    
+    return render(request, "app/busqueda_clientes.html", {"formulario_busqueda":formulario_busqueda})      

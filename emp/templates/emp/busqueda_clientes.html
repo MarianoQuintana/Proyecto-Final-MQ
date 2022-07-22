@@ -15,9 +15,9 @@
 <!-- Esto es un Menu -->
 <ul class="nav nav-pills">
   <li role="presentation" class="active"><a href="#">Inicio</a></li>
-  <li role="presentation"><a href="/empresa">Empresa</a></li>
-  <li role="presentation"><a href="/empleados">Empleados</a></li>
-  <li role="presentation"><a href="/clientes">Clientes</a></li>
+  <li role="presentation"><a href="/ver_empresa">Empresa</a></li>
+  <li role="presentation"><a href="/ ver_empleados">Empleados</a></li>
+  <li role="presentation"><a href="/ver_clientes">Clientes</a></li>
   <li role="presentation"><a href="/aformulario">Agregar Empresa</a></li>
   <li role="presentation"><a href="/bformulario">Agregar Empleado</a></li>
   <li role="presentation"><a href="/cformulario">Agragar Clientes</a></li>
@@ -28,12 +28,36 @@
 
 
 <!-- Esto es contenido -->
-{% block cuerpo %}
-Que vas a buscar hoy!
-{% endblock%}
+<h1> Busqueda de Clientes 
+
+</h1>
+{%if formulario_busqueda %}
+
+   <form action="" method="GET">
+   
+    {{formulario_busqueda}}
+
+   <button type="submit">Buscar</button>
+
+   </form>  
+{%else%}
+   {% if clientes%}
+   <ul>
+     {%for clientes in cliente %}
+        <li>Cliente {{clientes.nombre}} ,{{clientes.edad}} , {{clientes.tel}} , {{clientes.mail}}</li>
+     {% endfor %}
+   </ul>
+
+   {% else%}
+        <p>No hay datos con esa descripción.</p>
+    {% endif %}
+{% endif %}
+ 
 
 
-<!-- Estos el pie -->
+
+
+
 <div class="container-fluid footer navbar-fixed-bottom">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     <a class="text-dark" href="https://mariano.com/">mariano.com</a>

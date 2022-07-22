@@ -1,8 +1,11 @@
 {% extends "emp/index.html" %}
 
 {% block cuerpo %} 
-<div> <form action="" method="post">
-    {% csrf_token %} 
-    {{cformulario}}
- </form> </div>
+<div> <form action="" method="post"> {% csrf_token %} 
+    <table> 
+     {{cformulario}}  
+    </table> 
+    <input type="submit", value="Cargar formulario">
+    </form>
+    </div>
 {%endblock%} 
