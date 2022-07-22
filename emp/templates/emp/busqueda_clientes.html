@@ -43,8 +43,8 @@
 {%else%}
    {% if clientes%}
    <ul>
-     {%for clientes in cliente %}
-        <li>Cliente {{clientes.nombre}} ,{{clientes.edad}} , {{clientes.tel}} , {{clientes.mail}}</li>
+     {%for cliente in Clientes %}
+        <li>Cliente {{cliente.nombre}} ,{{cliente.edad}} , {{cliente.tel}} , {{cliente.mail}}</li>
      {% endfor %}
    </ul>
 

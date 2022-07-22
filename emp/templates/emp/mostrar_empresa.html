@@ -7,10 +7,10 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Lista de Empresas</h1>
+  <h1>Lista de empresas</h1>
   <ul>
-  {%for empresas in Empresa %}
-    <li> Razon social: {{empresas.nombre}}</li>
+  {%for empresa in empresas %}
+    <li> Razon social: {{empresa.nombre}}</li>
     <li> Cuit: >{{empresa.cuit}}</li>
    
     <li>---------------------------------</li>
