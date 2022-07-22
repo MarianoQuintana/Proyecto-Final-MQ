@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from emp.views import (index, ver_empresa, ver_empleados, ver_clientes, empresaFormulario, empleadosFormulario, clientesFormulario, buscarClientes)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('index/', index),
+    path('empresa/', ver_empresa),
+    path('empleados/', ver_empleados),
+    path('clientes/', ver_clientes),
+    path('aformulario/', empresaFormulario),
+    path('bformulario/', empleadosFormulario),
+    path('cformulario/', clientesFormulario),
+    path('busqueda_clientes/', buscarClientes),
 ]
