@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from emp.models import Empresa, Empleados, Clientes
 from emp.forms import EmpresaFormulario, EmpleadosFormulario, ClientesFormulario, Busqueda_Clientes
 
@@ -9,17 +10,20 @@ def index(request):
 def empresaFormulario(request):
     if request.method == 'POST':
         aformulario = EmpresaFormulario(request.POST)
-        print(aformulario)
+       
         if aformulario.is_valid:
             informacion = aformulario.cleaned_data
-            empresa = Empresa(nombre =informacion["nombre"], cuit = informacion["cuit"])
+            empresa= Empresa(nombre =informacion["nombre"], cuit = informacion["cuit"])
             empresa.save() 
 
-            return render(request,'emp/empresa.html',{})    
+            return render(request,'emp/empresa.html',{})   
     else:
          aformulario = EmpresaFormulario()
 
+
          return render(request,'emp/empresa.html',{"aformulario": aformulario})
+
+
 
 def ver_empresa(request):
     context = {"empresa": Empresa.objects.all()}
@@ -38,7 +42,7 @@ def empleadosFormulario(request):
             empleados= Empleados(nombre =informacion["nombre"], edad = informacion["edad"], tel = informacion["tel"], mail = informacion["mail"],)
             empleados.save() 
 
-            return render(request,'emp/empleados.html',{})    
+            return redirect(reverse_lazy(request,'emp/empleados.html',{}))    
     else:
          bformulario = EmpleadosFormulario()
 
@@ -60,7 +64,7 @@ def clientesFormulario(request):
             clientes = Clientes(nombre =informacion["nombre"], edad = informacion["edad"], tel = informacion["tel"], mail = informacion["mail"],)
             clientes.save() 
 
-            return render(request,'emp/clientes.html',{})    
+            return redirect(reverse_lazy(request,'emp/clientes.html',{}))    
     else:
          cformulario = ClientesFormulario()
 
@@ -81,6 +85,6 @@ def buscarClientes(request):
         formulario_busqueda = Busqueda_Clientes(request.GET)
         if formulario_busqueda.is_valid():
             clientes = Clientes.objects.filter(nombre=formulario_busqueda.cleaned_data["criterio"]).all()
-            return render(request, "app/busqueda_clientes.html", {"clientes": clientes})
+            return render(request,"app/busqueda_clientes.html", {"clientes": clientes})
     
-    return render(request, "app/busqueda_clientes.html", {"formulario_busqueda":formulario_busqueda})      
+    return render(request,"app/busqueda_clientes.html", {"formulario_busqueda":formulario_busqueda})      
